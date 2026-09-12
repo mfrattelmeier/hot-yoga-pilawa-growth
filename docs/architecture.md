@@ -1,43 +1,82 @@
 # Architecture
 
-## Confirmed Facts
+Status: proposed target architecture following the 2026-09-12 read-only audit. Google Analytics has not been connected, and no synchronization or write-back is authorized.
 
-- Google Analytics has not been connected.
+## System roles
 
-## Planned System Sources
+- **INFERRED:** Fitssey should remain the operational source of truth for clients, bookings/visits, pricing entitlements, contracts, purchases, and revenue, subject to status-code and finance reconciliation.
+- **INFERRED:** HubSpot should become the engagement source of truth for contacts, approved lifecycle state, segmentation, communications, consent-aware marketing operations, and a denormalized view of Fitssey status.
+- **CONFIRMED:** Meta is the source of truth for campaigns, ad sets, ads, lead forms, media spend, delivery, and platform-attributed actions.
+- **BUSINESS DECISION REQUIRED:** GA4 is a future website analytics source; `GA4_MEASUREMENT_ID` remains blank and GA4 must not be connected until tracking and consent design are approved.
+- **INFERRED:** A small external analytical layer is appropriate for append-only cross-system events, reconciliation, retention/cohort analysis, and attribution joins.
 
-- HubSpot — CRM, lifecycle, segmentation, communications, and attribution source.
-- Meta — advertising and lead-generation source.
-- Fitssey — expected operational source for bookings, attendance, purchases, memberships, and revenue, subject to audit confirmation.
-- Google Analytics (GA4) — future website analytics and attribution source.
+## Target data flow
 
-## Google Analytics Planning Placeholders
+```text
+Meta lead/events -----> controlled ingestion -----> HubSpot contact/acquisition summary
+        |                         |
+        v                         v
+analytical layer <----- identity crosswalk <----- Fitssey read-only extracts
+        ^                                           |
+        |                                           v
+future GA4 website events                 HubSpot operational summaries
+```
+
+- **INFERRED:** Initial production flows should be one-way: Meta to HubSpot, Fitssey to HubSpot, and all sources to analytics.
+- **INFERRED:** HubSpot-to-Fitssey writes are unnecessary for the first implementation and should remain disabled.
+- **BUSINESS DECISION REQUIRED:** Meta audience uploads, offline conversions, or CRM-to-Meta feedback are separate future capabilities requiring explicit approval and privacy review.
+
+## Integration boundaries
+
+- **TECHNICAL FOLLOW-UP REQUIRED:** Use environment variables, dedicated least-privilege credentials, GET-only clients during build validation, and separate read/write code paths.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Preserve source IDs and source timestamps; checkpoint pagination; handle `Retry-After`; implement idempotency and replay-safe backfill.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Logs must contain counts, timings, status codes, and masked errors—not access tokens or raw contact fields.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Add automated assertions that reject outbound non-GET requests until a future write phase is explicitly enabled.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Use a dead-letter/conflict queue for ambiguous identities rather than creating or merging records automatically.
+
+## Update frequency proposal
+
+- **BUSINESS DECISION REQUIRED:** Meta lead ingestion target: near-real-time or frequent polling, subject to consent and operational SLA.
+- **BUSINESS DECISION REQUIRED:** Fitssey current-state summaries: hourly or daily depending on follow-up and retention use cases.
+- **INFERRED:** Historical visits, sales, and Meta insights can refresh daily; late-arriving data should be re-read over a rolling window.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Validate Fitssey rate budgets before selecting frequency; the documented ceiling includes 200 requests per five minutes.
+
+## Website analytics and GA4 planning
 
 ### GA4 Measurement ID
 
-- Environment variable: `GA4_MEASUREMENT_ID`
-- Value: To be provided; no value is stored in the repository.
+- **CONFIRMED:** `.env.example` defines `GA4_MEASUREMENT_ID=` with no invented value.
+- **UNKNOWN:** No GA4 property, stream, Measurement ID, retention setting, Google Signals configuration, or Ads linkage has been audited.
 
-### Website Analytics
+### Website analytics
 
-- Tracking scope and event taxonomy: To be defined.
+- **BUSINESS DECISION REQUIRED:** Define a minimal event taxonomy before connection: page view, lead-form start/submit, booking start/complete, purchase handoff/complete, and consent update are candidates, not approved events.
+- **INFERRED:** Do not send names, emails, phone numbers, health-adjacent form text, or Fitssey raw identifiers in GA4 events or URLs.
 
-### UTM Standards
+### UTM standards
 
-- Naming convention and governance: To be defined.
+- **BUSINESS DECISION REQUIRED:** Approve controlled lowercase values for `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, and `utm_term`, plus immutable Meta IDs where available.
+- **INFERRED:** Recommended campaign token pattern is `market_offer_audience_yyyymm`; creative content should carry a stable version token. Exact Polish/English vocabulary remains a business choice.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Enforce URL validation and store both the original raw UTM touch and normalized reporting value.
 
-### HubSpot Website Tracking
+### HubSpot website tracking
 
-- Relationship between HubSpot tracking and GA4: To be defined.
+- **UNKNOWN:** Current HubSpot tracking-code deployment, cookie behavior, domain configuration, and form tracking were not inspected.
+- **BUSINESS DECISION REQUIRED:** Decide which website events belong in HubSpot versus GA4 and prevent duplicate form/conversion events.
 
 ### Consent and Google Consent Mode v2
 
-- Consent categories, regional behavior, and implementation approach: To be defined.
+- **CONFIRMED:** Google states Consent Mode consumes choices from a consent banner and does not provide the banner itself; advanced mode may transmit cookieless pings under denied consent: <https://support.google.com/analytics/answer/10000067>.
+- **BUSINESS DECISION REQUIRED:** Choose a consent-management approach and obtain Polish/EU legal review for default states, categories, notices, withdrawal, evidence, and tag behavior.
+- **TECHNICAL FOLLOW-UP REQUIRED:** When authorized, test `analytics_storage`, `ad_storage`, `ad_user_data`, and `ad_personalization` in all banner paths before production.
 
-### Future Attribution Integration
+### Future attribution integration
 
-- Cross-system attribution design across GA4, HubSpot, Meta, and Fitssey: To be defined after the audit and data-model approval.
+- **INFERRED:** GA4 should contribute web-touch events to the analytical layer, not overwrite Fitssey conversion truth or Meta delivery truth.
+- **BUSINESS DECISION REQUIRED:** Decide whether consented client/user IDs may be used for cross-device or offline joins; default to pseudonymous, minimized identifiers.
 
-## Assumptions
+## Security, privacy, and governance
 
-## Open Questions
+- **CONFIRMED:** GDPR requires purpose limitation, minimization, accuracy, storage limitation, lawful processing, transparency, processor controls, security, and compliant international transfers: <https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng>.
+- **BUSINESS DECISION REQUIRED:** Complete a data-processing inventory, processor/subprocessor review, retention schedule, access matrix, and transfer assessment before enabling cross-system writes or ad feedback.
+- **UNKNOWN:** Whether a DPIA is legally required; assess this with qualified counsel based on final scope, profiling, sensitive data, minors, scale, and tracking design.
