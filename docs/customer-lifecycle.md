@@ -1,48 +1,75 @@
 # Customer Lifecycle
 
-Status: proposed framework based on audit evidence. No lifecycle automation is authorized.
+Status: proposed framework based on the 2026-09-12 technical audit and historical business evidence. No lifecycle automation, schema change, or external write is authorized. Historical prices, packages, class times, and schedules are not current truth.
 
 ## Confirmed current state
 
-- **CONFIRMED:** All 382 HubSpot contacts are at Lead; Lead Status is blank for every contact.
-- **CONFIRMED:** Fitssey has 466 active clients, visit history for 386 unique clients, and sales history for 288 unique clients.
-- **CONFIRMED:** HubSpot and Fitssey therefore describe different slices of the population and are not currently a unified lifecycle view.
-- **INFERRED:** HubSpot lifecycle cannot presently distinguish prospect, booked visitor, attendee, purchaser, active customer, or lapsed customer.
+- **CONFIRMED:** All 382 HubSpot contacts are at Lead; Lead Status is blank for every contact. [Source: audits/hubspot/current-state.md]
+- **CONFIRMED:** Fitssey has 466 active clients, visit history for 386 unique clients, and sales history for 288 unique clients. [Source: audits/fitssey/current-state.md]
+- **CONFIRMED:** HubSpot and Fitssey describe different slices of the population and are not currently a unified lifecycle view. [Source: audits/cross-system-gap-analysis.md]
+- **INFERRED:** HubSpot lifecycle cannot presently distinguish prospect, booked visitor, attendee, purchaser, active customer, or lapsed customer. [Source: audits/hubspot/current-state.md]
+
+## Historical business-language journey
+
+The histories describe a human, community-oriented journey: someone hears about the studio through Meta/social, the website, an event, referral, or local word of mouth; asks a question or books through Fitssey; arrives with beginner concerns; receives reassurance, instruction, and modifications; buys a pass, course, or event; builds regularity; and may later renew, lapse, return, or refer another person. This is historical context, not proof that every handoff currently occurs. [Sources: marketing-content-history.md; kurs-jogi-od-podstaw-history.md; general-unprojected-chats-history.md]
+
+Kat historically emphasized low-pressure entry, being looked after, clear first steps, regular practice, and community. Structured beginner courses were used to build confidence before regular hot classes, while WhatsApp and personal messages supported course participants. Historical inactive-client outreach and seasonal “return to routine” messaging suggest reactivation intent, but no current cadence or outcome data is confirmed. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
 
 ## Proposed lifecycle evidence model
 
-| Stage/state | Minimum system evidence | Status |
-| --- | --- | --- |
-| New lead | New HubSpot/Meta acquisition event with usable contact method | **BUSINESS DECISION REQUIRED:** approve entry rule. |
-| Contacting | Owned lead plus recorded outreach attempt | **BUSINESS DECISION REQUIRED:** approve SLA and outcome fields. |
-| Connected | Two-way human response | **BUSINESS DECISION REQUIRED:** define acceptable channels. |
-| Qualified | Approved fit/intent criteria | **BUSINESS DECISION REQUIRED:** define qualification without overusing sensitive data. |
-| First booking | First qualifying future Fitssey booking | **TECHNICAL FOLLOW-UP REQUIRED:** map visit statuses. |
-| First attended visit | First attended Fitssey visit | **TECHNICAL FOLLOW-UP REQUIRED:** confirm attended code. |
-| First-time customer | First paid order or approved paid-attendance rule | **BUSINESS DECISION REQUIRED:** choose commercial definition. |
-| Active customer | Valid entitlement and/or recent attendance | **BUSINESS DECISION REQUIRED:** define by product type and recency. |
-| At-risk | Declining activity or entitlement approaching expiry | **BUSINESS DECISION REQUIRED:** choose thresholds. |
-| Lapsed | No qualifying activity for an approved interval | **BUSINESS DECISION REQUIRED:** choose separate class/course/membership windows. |
-| Reactivated | New attendance or purchase after lapse | **BUSINESS DECISION REQUIRED:** define reset/evidence rule. |
-| Advocate | Explicit referral/review/ambassador evidence | **BUSINESS DECISION REQUIRED:** do not infer from spend alone. |
+| Stage/state | Business-language description | Minimum system evidence | Status |
+| --- | --- | --- | --- |
+| New lead | A person has expressed interest but has not yet booked or bought. | New HubSpot/Meta acquisition event with usable contact method | **BUSINESS DECISION REQUIRED:** approve entry and repeat-submission rules. |
+| Contacting | The studio is attempting a timely, helpful response. | Owned lead plus recorded outreach attempt | **BUSINESS DECISION REQUIRED:** approve SLA, channels, cadence, and outcomes. |
+| Connected | A two-way exchange confirms the person was reached. | Recorded human response | **BUSINESS DECISION REQUIRED:** define acceptable channels and evidence. |
+| Qualified | The studio and person have identified a suitable next step. | Approved fit/intent criteria and next action | **BUSINESS DECISION REQUIRED:** minimize health-adjacent data and define disqualification. |
+| First booking | A first future visit is reserved in Fitssey. | Earliest qualifying Fitssey booking/visit row | **TECHNICAL FOLLOW-UP REQUIRED:** map Fitssey status codes. |
+| First attended visit | The person completed the first studio experience. | Earliest attended Fitssey visit | **TECHNICAL FOLLOW-UP REQUIRED:** confirm attended code. |
+| First-time customer | The person completed the approved first commercial conversion. | First paid order or approved paid-attendance rule | **BUSINESS DECISION REQUIRED:** decide treatment of free trials, vouchers, events, and courses. |
+| Regular / active customer | The person has a valid relationship evidenced by recent attendance and/or entitlement. | Approved Fitssey entitlement/activity rule | **BUSINESS DECISION REQUIRED:** define per product type and recency. |
+| Course participant | The person is enrolled in a structured, time-bounded program. | Current course enrollment/attendance evidence | **BUSINESS DECISION REQUIRED:** decide whether this is a segment, state, or both. |
+| At-risk | Engagement is falling or an entitlement is near expiry. | Approved decline/expiry trigger | **BUSINESS DECISION REQUIRED:** choose thresholds and exclusions. |
+| Lapsed | No qualifying activity has occurred within an approved interval. | Fitssey activity/entitlement evidence | **BUSINESS DECISION REQUIRED:** choose separate class, course, and contract windows. |
+| Reactivated | A previously lapsed person attends or purchases again. | New qualifying event after lapse | **BUSINESS DECISION REQUIRED:** define reset and credit rules. |
+| Advocate | The person explicitly refers, reviews, or supports the studio. | Recorded referral/review/ambassador evidence | **BUSINESS DECISION REQUIRED:** never infer advocacy from spend alone. |
+
+## Entry-path context
+
+- **Historical beginner path:** campaign/content or referral → question/booking → beginner course or suitable first class → regular class/pass or membership concept. [Source: marketing-content-history.md]
+- **Historical event path:** social/newsletter/message → event interest → direct message, form, or Fitssey purchase → attendance → community follow-up. The route varied and should be standardized only after current review. [Source: marketing-content-history.md]
+- **Historical children’s path:** guardian sees promotion → submits/requests contact → trial or course booking → child attendance → paid continuation. This remained partly proposed and raises guardian/minor data-model and consent decisions. [Source: strona-www-i-fitssey-history.md]
+- **Proposed longevity path:** baseline measurement → activity program → recovery → repeat measurement → renewal. This is a grant-era proposal, not a current lifecycle. [Source: grants-dotacje-history.md]
+
+## Known friction and service moments
+
+- Historical beginner fears included being insufficiently fit, flexible, or experienced and uncertainty about which class to choose. [Sources: marketing-content-history.md; kurs-jogi-od-podstaw-history.md]
+- Historical operational friction included late cancellations, no-shows, speculative bookings, pass-expiry/make-up requests, and manual booking or pass exceptions. [Source: rozwoj-studia-history.md]
+- Historical demand varied by season and time slot; old schedules must not define current lifecycle triggers. [Sources: marketing-content-history.md; rozwoj-studia-history.md]
+- First-visit preparation, welcome, modification, and clear next-step recommendations are strategically important but not documented as a current standard process. [Sources: kurs-jogi-od-podstaw-history.md; general-unprojected-chats-history.md]
 
 ## HubSpot lifecycle versus studio status
 
-- **INFERRED:** Keep HubSpot's standard lifecycle stage for broad relationship progression and add one controlled `studio_customer_status` for operational engagement state.
+- **INFERRED:** Keep HubSpot's standard lifecycle stage for broad relationship progression and add one controlled `studio_customer_status` only after approval. [Source: docs/data-model.md]
 - **INFERRED:** A contact can remain `Customer` in HubSpot while moving between Active, At-risk, Lapsed, and Reactivated studio status.
 - **BUSINESS DECISION REQUIRED:** Approve mapping from studio evidence to HubSpot Lead/MQL/SQL/Opportunity/Customer; do not equate a form submission automatically with MQL or a Fitssey account automatically with Customer.
 - **BUSINESS DECISION REQUIRED:** Decide whether free visits, vouchers, staff/test accounts, guardians booking for children, and event-only buyers qualify as Customers.
 
 ## Ownership and service levels
 
-- **CONFIRMED:** HubSpot exposes two active owners, but current ownership distribution and lead activities were not included in the audit output.
-- **UNKNOWN:** Current manual lead-response process, response times, channels, and disposition vocabulary.
-- **BUSINESS DECISION REQUIRED:** Assign default and backup owner, hours of operation, first-response target, attempt cadence, stop conditions, and mandatory outcomes.
+- **CONFIRMED:** HubSpot exposes two active owners, but current ownership distribution and lead activities were not included in the audit output. [Source: audits/hubspot/current-state.md]
+- **HISTORICAL:** Kat/Kasia was the central customer-facing operator, and communication often occurred through WhatsApp, direct messages, phone, or Fitssey newsletters. This does not establish current ownership or lawful marketing permission. [Sources: marketing-content-history.md; rozwoj-studia-history.md]
+- **BUSINESS DECISION REQUIRED:** Assign default and backup owner, hours of operation, first-response target, attempt cadence, escalation, stop conditions, and mandatory outcomes.
 - **BUSINESS DECISION REQUIRED:** Separate operational/service messages from marketing nurture and respect subscription/consent state.
+
+## Retention and reactivation context
+
+Historical tactics included course progression, regularity challenges, longer or seasonal passes, workshops/events, personal reminders, inactive-client outreach, and post-holiday return-to-routine campaigns. They are evidence of prior thinking, not approved automation or current commercial policy. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
+
+Future retention should be based on attended visits and verified entitlement/purchase evidence, not reservations alone. Product-specific thresholds are necessary because a course participant, limited-pass customer, unlimited-contract customer, and event-only buyer have different expected rhythms. [Sources: audits/fitssey/current-state.md; rozwoj-studia-history.md]
 
 ## Automation prerequisites
 
-- **TECHNICAL FOLLOW-UP REQUIRED:** Confirm Fitssey visit-status and finance semantics, build the identity crosswalk, and validate stage calculations on sampled records.
+- **TECHNICAL FOLLOW-UP REQUIRED:** Confirm Fitssey visit-status and finance semantics, reconcile the current product catalog, build the identity crosswalk, and validate stage calculations on sampled records.
 - **BUSINESS DECISION REQUIRED:** Approve lifecycle, field definitions, consent/legal basis, suppression rules, quiet hours, and exit criteria.
 - **TECHNICAL FOLLOW-UP REQUIRED:** Design automations as disabled specifications with test cases and rollback paths before any activation request.
-- **CONFIRMED:** Under repository rules, no marketing automation may be built until the lifecycle and data model are approved.
+- **CONFIRMED:** Under repository rules, no marketing automation may be built until the lifecycle and data model are approved. [Source: AGENTS.md]

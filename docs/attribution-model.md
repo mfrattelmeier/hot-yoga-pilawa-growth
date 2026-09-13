@@ -9,7 +9,7 @@ Status: proposed measurement framework. It does not authorize tracking, uploads,
 - **CONFIRMED:** Only 78 current Meta lead records are person-level retrievable; all match HubSpot, and eight match active Fitssey clients by email.
 - **CONFIRMED:** HubSpot Facebook click ID and Facebook ID are blank on all 382 contacts.
 - **CONFIRMED:** Meta ad sets use mixed attribution windows: mostly one-day click, with two using seven-day click plus one-day view.
-- **UNKNOWN:** GA4 is not connected, and website/HubSpot tracking and consent behavior are not audited.
+- **CONFIRMED POST-AUDIT:** A GA4 website stream for `https://hotyogapilawa.pl` was created and attached to the studio’s existing Google tag. **UNKNOWN / NOT AUDITED:** reliable event collection, event taxonomy, consent/banner behavior, Consent Mode v2, Google Ads linkage/configuration, Search Console, HubSpot website tracking, conversion definitions, and duplicate-event behavior.
 
 ## Measurement layers
 

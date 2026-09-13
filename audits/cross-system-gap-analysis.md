@@ -1,6 +1,6 @@
 # Cross-System Gap Analysis and Executive Summary
 
-Audit date: 2026-09-12. This is a read-only point-in-time assessment of HubSpot, Meta, and Fitssey. No external system was modified. Google Analytics was not connected.
+Audit date: 2026-09-12. This is a read-only point-in-time assessment of HubSpot, Meta, and Fitssey. No external system was modified. Google Analytics was outside the audit. Post-audit update: a GA4 website stream was created and attached to the studio’s existing Google tag, but it is not fully configured or validated.
 
 ## Executive summary
 
@@ -10,7 +10,7 @@ Audit date: 2026-09-12. This is a read-only point-in-time assessment of HubSpot,
 - **CONFIRMED:** Only 107 of 382 HubSpot contacts match active Fitssey clients by email. Only eight of the 78 currently retrievable Meta leads match Fitssey by email; these are lower bounds because Fitssey phone matching was rate-limited.
 - **CONFIRMED:** Meta reports 400 lead actions, while only 78 person-level Page-form leads are currently retrievable. Current APIs therefore cannot reconstruct all historical lead identities.
 - **INFERRED:** The business has a functioning lead-generation path but not a closed-loop CRM: lead, booking, attendance, purchase, membership, retention, and revenue states are not joined in one approved model.
-- **INFERRED:** Fitssey should remain operational source of truth; HubSpot should become the engagement/lifecycle view; Meta should remain media-delivery and ad-performance truth; GA4 should later provide consent-aware website behavior.
+- **INFERRED:** Fitssey should remain operational source of truth; HubSpot should become the engagement/lifecycle view; Meta should remain media-delivery and ad-performance truth; the newly created GA4 stream should later provide consent-aware website behavior after validation.
 - **BUSINESS DECISION REQUIRED:** Do not build automation or bulk synchronization until lifecycle definitions, identity resolution, lawful purposes, consent, retention, and backfill boundaries are approved.
 
 ## Major data-quality problems
@@ -33,7 +33,7 @@ Audit date: 2026-09-12. This is a read-only point-in-time assessment of HubSpot,
 | Contact engagement profile | HubSpot | **INFERRED:** Appropriate destination once lifecycle and synchronization are approved. |
 | Lifecycle, segmentation, communications | HubSpot | **BUSINESS DECISION REQUIRED:** Intended role; current data does not implement it. |
 | Media configuration and delivery | Meta | **CONFIRMED:** Campaign/ad objects and insights are authoritative there. |
-| Website behavior | GA4 | **BUSINESS DECISION REQUIRED:** Future source; not yet connected. |
+| Website behavior | GA4 | **CONFIRMED POST-AUDIT:** Stream created and attached to an existing Google tag. **UNKNOWN:** reliable collection and configuration remain unvalidated. |
 | Cross-system reporting | External analytical layer | **INFERRED:** Needed for immutable event history and multi-source attribution without overloading HubSpot. |
 
 ## Recommended target schema
@@ -62,7 +62,7 @@ Audit date: 2026-09-12. This is a read-only point-in-time assessment of HubSpot,
 5. **TECHNICAL FOLLOW-UP REQUIRED:** Build read-only incremental extractors with checkpoints, rate limits, PII-safe logs, and monitoring.
 6. **BUSINESS DECISION REQUIRED:** Authorize a small pilot write into a non-production/test segment only after review; no pilot is part of Phase 1.
 7. **TECHNICAL FOLLOW-UP REQUIRED:** Validate lifecycle calculations against sampled records, then design—but do not yet activate—automation.
-8. **BUSINESS DECISION REQUIRED:** Connect GA4/website/consent tooling and later decide on offline conversion or audience feedback to Meta.
+8. **BUSINESS DECISION REQUIRED:** Validate GA4 collection and website consent tooling, then later decide on offline conversion or audience feedback to Meta.
 
 ## Top 10 decisions for Michael and Kat
 

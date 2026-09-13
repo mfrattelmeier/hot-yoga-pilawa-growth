@@ -21,7 +21,7 @@ Status: proposed design following the 2026-09-12 read-only audit. No schema chan
 | Pricing entitlement | Fitssey | client pricing-option GUID | **CONFIRMED:** client relationship is available. |
 | Contract/membership | Fitssey | client contract GUID | **CONFIRMED:** relationship is available. |
 | Campaign/ad delivery | Meta | campaign/ad-set/ad IDs | **CONFIRMED:** authoritative media configuration/performance. |
-| Website event | Future GA4/analytical layer | event/user/session identifiers | **UNKNOWN:** GA4 is not connected. |
+| Website event | GA4/analytical layer | event/user/session identifiers | **CONFIRMED:** stream created and attached to an existing Google tag. **UNKNOWN:** collection, taxonomy, consent, conversions, and duplicate behavior are not validated. |
 
 ## Proposed HubSpot contact properties
 
