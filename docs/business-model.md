@@ -1,6 +1,6 @@
 # Business Model
 
-Status: business-context synthesis. Historical pricing, package structures, class times, and schedules are not current truth and must be reconciled against Fitssey before operational use.
+Status: business-context synthesis updated by the 2026-09-13 Fitssey reconciliation. Historical pricing, package structures, class times, and schedules are not current truth. The dated Fitssey register is current system evidence, but owner approval is still required before operational or marketing use.
 
 ## Executive Summary
 
@@ -15,16 +15,16 @@ Hot Yoga Pilawa is an operating boutique yoga and movement studio in Pilawa. The
 
 ## Core Services
 
-- **CURRENTLY CONFIRMED AT CATALOG LEVEL:** Fitssey exposes 45 class services: 28 classroom services and 17 courses. The audit did not designate which individual services are actively marketed or currently scheduled. [Source: audits/fitssey/current-state.md]
-- **HISTORICALLY DELIVERED:** Paid group yoga, hot yoga/Bikram-style practice, Hot Pilates/HIIT, classical Pilates, beginner courses, and a mix of strength, mobility, back-care, breathing, and restorative formats. Exact current names, schedule, temperatures, suitability, and availability require Fitssey reconciliation. [Sources: marketing-content-history.md; kurs-jogi-od-podstaw-history.md; rozwoj-studia-history.md]
+- **CONFIRMED CURRENT FITSSEY EVIDENCE:** Fitssey exposes 45 services: 28 classroom and 17 course. Thirteen services appeared in the current/future schedule request, including Bikram, Inferno/Hot Pilates, Hatha/Vinyasa beginner classes, Yin/regeneration, Iyengar, classical Pilates, mobility, stretching, back-care/gentle yoga, breathing/relaxation, and one workshop. Thirty-two catalog records remain UNKNOWN STATUS because the API has no active/archive flag. [Sources: audits/fitssey/current-service-catalog.md; audits/fitssey/current-schedule-structure.md]
+- **HISTORICALLY DELIVERED:** Paid group yoga, hot yoga/Bikram-style practice, Hot Pilates/HIIT, classical Pilates, beginner courses, and a mix of strength, mobility, back-care, breathing, and restorative formats. Historical temperatures, suitability, inclusions, and timetables remain stale even where a current Fitssey name matches. [Sources: marketing-content-history.md; kurs-jogi-od-podstaw-history.md; rozwoj-studia-history.md; docs/current-offer-register.md]
 - **HISTORICALLY DELIVERED OR PREPARED:** Workshops, community challenges, children’s sessions/courses, and events. Current availability is unknown. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
 
 ## Revenue Streams
 
-- **CURRENTLY CONFIRMED AT SYSTEM LEVEL:** Fitssey contains pricing entitlements, two contract products, sales history, and 45 pricing options; 26 pricing options and both contracts are sold online. Current product names, prices, commercial terms, and accounting totals are not approved by this synthesis. [Source: audits/fitssey/current-state.md]
+- **CONFIRMED CURRENT FITSSEY EVIDENCE:** Fitssey contains 45 pricing templates, 26 sold online, plus two sold-online OPEN contract templates. The dated names, template amounts, tax factors, session limits, expiration types, and online flags are recorded in the current offer register; commercial policy and marketing use remain unapproved. [Sources: audits/fitssey/current-pricing-options.md; docs/current-offer-register.md]
 - **HISTORICAL:** Single visits, limited-entry passes, unlimited/OPEN concepts, longer-duration packages, structured courses, workshops/events, and memberships or recurring-contract concepts were used or discussed at different times. Their terms conflict across sources and are not current truth. [Sources: marketing-content-history.md; rozwoj-studia-history.md; general-unprojected-chats-history.md]
 - **HISTORICAL COMMERCIAL INSIGHT:** The owner described structured beginner courses as more profitable and operationally useful than relying only on a broad drop-in timetable, with a pathway into regular practice. This is historical qualitative evidence, not current unit economics. [Source: marketing-content-history.md]
-- **UNKNOWN:** Finance-grade revenue, margin by offer, refunds/voids, tax treatment, and current product mix. Fitssey sales pagination must be reconciled before monetary totals are published. [Sources: audits/fitssey/current-state.md; audits/cross-system-gap-analysis.md]
+- **NARROWED:** Fitssey API pagination now reconciles to 1,086 rows and 1,076 unique sale GUIDs after removing 10 exact duplicates. Net, tax, discount, and post-discount totals balance, but configured currency, refunds/voids, accounting control, margin, and approved revenue recognition remain unresolved. [Source: audits/fitssey/finance-reconciliation.md]
 
 ## Customer Segments
 
@@ -32,7 +32,8 @@ Historically supported segments include beginners; regular yoga and hot-yoga pra
 
 ## Customer Acquisition Channels
 
-- **CONFIRMED CURRENT SYSTEM EVIDENCE:** Meta is the audited paid-media and lead-generation source; HubSpot contains 382 paid-social form contacts. [Sources: audits/meta/current-state.md; audits/hubspot/current-state.md]
+- **CONFIRMED SYSTEM EVIDENCE:** Phase 1 confirmed 382 paid-social form contacts. A Phase 1A count-only read found 383 non-archived contacts after one new contact was created on 2026-09-13; the new record's source and lifecycle properties were not re-audited. [Sources: audits/meta/current-state.md; audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md]
+- **OWNER INPUT:** Michael states all current HubSpot contacts were created from Meta lead generation and none were manually added. Available historical person-level Meta data will be preserved, while complete prospective attribution should begin from an approved cutover date; the date remains undecided.
 - **HISTORICAL:** Facebook and Instagram content/ads, the studio website, Fitssey booking pages, WhatsApp, phone/messages, newsletters, Google/Facebook review requests, referrals, events, local partnerships, and community activity. Channel effectiveness was rarely measured. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
 - **UNKNOWN:** Current contribution of organic, referral, local, website, review, and event channels. GA4 now exists, but reliable live collection and conversion behavior have not been validated. [Sources: docs/architecture.md; audits/cross-system-gap-analysis.md]
 
@@ -44,7 +45,7 @@ Historical evidence supports a practical journey of discovery or inquiry → hum
 
 - **HISTORICAL:** Regular practice, course progression, community contact, challenges, seasonal passes, workshops, personal communication, and review/referral requests were used or proposed to sustain engagement. [Source: marketing-content-history.md]
 - **HISTORICAL FRICTION:** Late cancellations, no-shows, speculative bookings, pass-expiry exceptions, manual administration, summer attendance decline, and weaker demand in some time slots. [Sources: rozwoj-studia-history.md; marketing-content-history.md]
-- **CURRENT DESIGN GAP:** Active, at-risk, lapsed, renewed, and reactivated states remain business decisions because Fitssey visit-status semantics and product-specific recency rules are unresolved. [Sources: docs/customer-lifecycle.md; audits/fitssey/current-state.md]
+- **CURRENT DESIGN GAP:** Visit states are now technically mapped and current/expired entitlement aggregates are available. Active, at-risk, lapsed, renewed, and reactivated thresholds remain business decisions because product-specific recency, unpaid/not-activated treatment, and commercial policies are unapproved. [Sources: docs/customer-lifecycle.md; audits/fitssey/visit-status-map.md; audits/fitssey/current-state-reconciliation.md]
 
 ## Current Growth Priorities
 
@@ -52,7 +53,7 @@ The evidence supports these as current decision priorities, not authorized imple
 
 1. Join paid lead, booking, attendance, purchase, and retention evidence without unsafe identity merges. [Source: audits/cross-system-gap-analysis.md]
 2. Define lead ownership, response standards, lifecycle stages, and outcomes. [Sources: audits/hubspot/current-state.md; docs/customer-lifecycle.md]
-3. Reconcile the current Fitssey offer, pricing, schedule, visit statuses, and finance totals. [Source: audits/fitssey/current-state.md]
+3. Approve the reconciled Fitssey offer hierarchy and commercial policies, then validate finance against a Fitssey UI/accounting control. [Sources: docs/current-offer-register.md; audits/fitssey/commercial-policy-reconciliation.md; audits/fitssey/finance-reconciliation.md]
 4. Improve retention and class utilization while reducing manual booking/pass exceptions. [Sources: rozwoj-studia-history.md; marketing-content-history.md]
 5. Establish consent-aware website analytics and attribution before expanding automation. [Sources: docs/architecture.md; docs/attribution-model.md]
 
@@ -71,15 +72,15 @@ The following are **HISTORICAL PROPOSALS OR UNVERIFIED PLANS**, not current offe
 ## Systems Supporting the Business
 
 - **Fitssey:** operational source of truth for clients, bookings/visits, entitlements, contracts, purchases, and revenue, subject to audit reconciliation. [Sources: AGENTS.md; audits/fitssey/current-state.md]
-- **HubSpot:** intended engagement, lifecycle, segmentation, communications, and attribution view; currently all 382 audited contacts remain Lead with blank Lead Status. [Sources: AGENTS.md; audits/hubspot/current-state.md]
+- **HubSpot:** intended engagement, lifecycle, segmentation, communications, and attribution view; all 382 contacts in the Phase 1 snapshot were Lead with blank Lead Status. The Phase 1A count-only read found 383 non-archived contacts but did not re-audit lifecycle properties. [Sources: AGENTS.md; audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md]
 - **Meta:** advertising, lead-generation, media-delivery, and platform performance source. [Sources: AGENTS.md; audits/meta/current-state.md]
 - **GA4:** the website stream has been created and attached to the studio’s existing Google tag; reliable collection, consent behavior, events, and advertising configuration remain unvalidated. [Source: docs/architecture.md]
 - **Analytical layer:** proposed append-only cross-system reporting and reconciliation layer. [Source: docs/architecture.md]
 
 ## Confirmed Facts
 
-- Fitssey currently exposes 466 active clients, 8,137 visit rows, 45 class services, 45 pricing options, two contracts, and sales history; counts are point-in-time as of 2026-09-12. [Source: audits/fitssey/current-state.md]
-- HubSpot currently contains 382 paid-social form contacts, all at lifecycle stage Lead and all with blank Lead Status. [Source: audits/hubspot/current-state.md]
+- Fitssey currently returns 467 default-list clients plus 10 deleted records, 45 services, 45 pricing options, two contracts, 14 staff records, 13 scheduled services in the audited window, and 8,283 visit-report rows through the requested future boundary; counts are point-in-time as of 2026-09-13. [Sources: audits/fitssey/current-state-reconciliation.md; audits/fitssey/current-service-catalog.md; audits/fitssey/current-schedule-structure.md]
+- HubSpot returned 383 non-archived contacts in the Phase 1A count-only read, one more than Phase 1. The Phase 1 property audit established paid-social/form origin, Lead stage, and blank Lead Status for its 382-contact snapshot; those properties were not re-audited for the new contact. [Sources: audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md]
 - Meta currently contains 16 campaigns, 14 active lead forms, and 400 reported lead actions; only 78 person-level form leads were retrievable in the audit. [Source: audits/meta/current-state.md]
 - Only 107 HubSpot contacts matched active Fitssey clients by normalized email in the audited comparison. [Source: audits/cross-system-gap-analysis.md]
 
@@ -97,7 +98,7 @@ The following are **HISTORICAL PROPOSALS OR UNVERIFIED PLANS**, not current offe
 
 ## Business Decisions Required
 
-- Approve the current offer hierarchy only after Fitssey reconciliation: core classes, beginner entry routes, passes/contracts, courses, events, and any first-timer offer.
+- Approve the dated current offer register: core classes, beginner entry routes, passes/contracts, courses, events, and any first-timer offer.
 - Define lead, customer, active, at-risk, lapsed, reactivated, and advocate states.
 - Choose lead ownership, response SLA, disposition vocabulary, and escalation.
 - Approve identity, duplicate, consent, retention, attribution, and historical-backfill rules.
@@ -106,7 +107,7 @@ The following are **HISTORICAL PROPOSALS OR UNVERIFIED PLANS**, not current offe
 
 ## Open Questions
 
-- Which Fitssey services, pricing options, contracts, and schedule items are current and customer-facing?
+- Which UNKNOWN STATUS catalog records and not-sold-online options are active, staff-only, seasonal, superseded, or archived?
 - What are the current booking, cancellation, no-show, expiry, freeze, refund, and waitlist rules?
 - Which acquisition channels produce attended first visits and paid customers?
 - What currently drives retention, lapse, referral, and class-time demand?

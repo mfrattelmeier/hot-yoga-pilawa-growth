@@ -1,14 +1,14 @@
 # Marketing Strategy
 
-Status: strategy synthesis only. It does not authorize campaigns, tracking, automation, schema changes, or external writes. Historical offers, prices, packages, class times, and schedules must not be advertised as current until reconciled against Fitssey and approved.
+Status: strategy synthesis only. It does not authorize campaigns, tracking, automation, schema changes, or external writes. The 2026-09-13 Fitssey register is point-in-time current evidence, but no offer, price, class time, or schedule may be advertised until owner approval and website/FrontOffice alignment.
 
 ## Executive Summary
 
-Hot Yoga Pilawa has historically marketed a supportive local studio where beginners can start without pressure and regular clients can combine strength, mobility, heat, recovery, and community. Meta is the only currently audited acquisition source, and HubSpot currently contains 382 paid-social form contacts. The histories add useful campaign and messaging context, but almost no reliable closed-loop performance evidence. The next marketing system should connect acquisition to first booking, attendance, first paid purchase, and retention while preserving consent and source-native identifiers. [Sources: audits/meta/current-state.md; audits/hubspot/current-state.md; audits/cross-system-gap-analysis.md; marketing-content-history.md]
+Hot Yoga Pilawa has historically marketed a supportive local studio where beginners can start without pressure and regular clients can combine strength, mobility, heat, recovery, and community. Meta is the only currently audited acquisition source. Phase 1 confirmed 382 HubSpot paid-social form contacts; a Phase 1A count-only read found 383 non-archived contacts after one new record was created on 2026-09-13. The histories add useful campaign and messaging context, but almost no reliable closed-loop performance evidence. The next marketing system should connect acquisition to first booking, attendance, first paid purchase, and retention while preserving consent and source-native identifiers. [Sources: audits/meta/current-state.md; audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md; audits/cross-system-gap-analysis.md; marketing-content-history.md]
 
 ## Current Acquisition Channels
 
-- **CONFIRMED CURRENT:** Meta/Facebook lead generation feeds the audited HubSpot contact base; all 382 contacts have paid-social/form origins. [Source: audits/hubspot/current-state.md]
+- **CONFIRMED SNAPSHOT:** Meta/Facebook lead generation fed all 382 contacts in the Phase 1 HubSpot snapshot. Phase 1A found 383 non-archived contacts but did not re-audit the new record's source properties. Michael separately states that all current HubSpot contacts came from Meta lead generation. [Sources: audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md]
 - **CONFIRMED CURRENT AS PLATFORM INVENTORY:** Meta contains 16 campaigns, 14 active lead forms, and 400 reported lead actions; only 78 person-level leads were retrievable. [Source: audits/meta/current-state.md]
 - **HISTORICAL:** Instagram/Facebook organic content, website and Fitssey booking routes, WhatsApp, direct messages, phone, newsletters, events, reviews, referrals, and local partnerships. Current contribution and ownership are unknown. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
 
@@ -16,13 +16,14 @@ Hot Yoga Pilawa has historically marketed a supportive local studio where beginn
 
 - Historical campaigns and concepts covered beginner yoga, Hot Pilates, general studio promotion, children’s yoga, workshops/events, seasonal challenges, and retreats. Implementation and results vary and must be verified against Meta. [Sources: marketing-content-history.md; strona-www-i-fitssey-history.md; general-unprojected-chats-history.md]
 - The current audit confirms 15 lead-objective campaigns, one engagement campaign, 12 creative-referenced form IDs, mixed attribution windows, inconsistent naming, and a 322-lead person-history gap. [Source: audits/meta/current-state.md]
+- **OWNER INPUT:** Michael states all current HubSpot contacts came from Meta lead generation and none were manually added. The working default is to preserve available history, accept the remaining person-level gap as likely incomplete historical availability unless a reliable export/archive is found, and begin complete prospective attribution from an approved cutover date. No Meta retention-period claim is made.
 - Form schemas historically accumulated event-specific questions and inconsistent identity keys. Future forms should use a small stable identity/consent core and store repeat submissions as events rather than overwriting contact context. [Sources: audits/meta/current-state.md; docs/data-model.md]
 - **GUARDRAIL:** No historical campaign copy, audience, radius, trial, price, timetable, or availability claim is approved for reuse without current offer and policy confirmation.
 
 ## Website / SEO
 
 - **HISTORICAL:** The studio website and Fitssey booking page were used or referenced, and content was prepared for class descriptions, beginner FAQs, children’s offerings, workshops, retreats, and Bikram/Vinyasa education. Publication and current accuracy are uneven or unknown. [Sources: marketing-content-history.md; kurs-jogi-od-podstaw-history.md; rozwoj-studia-history.md]
-- **UNKNOWN:** Current CMS ownership, SEO visibility, Search Console, conversion pages, form behavior, booking handoff, local-search performance, and current pricing/schedule accuracy. [Sources: general-unprojected-chats-history.md; docs/architecture.md]
+- **UNKNOWN:** Current CMS ownership, SEO visibility, Search Console, conversion pages, form behavior, booking handoff, local-search performance, and whether website pricing/schedule content matches the dated Fitssey register. [Sources: general-unprojected-chats-history.md; docs/architecture.md; docs/current-offer-register.md]
 - Future content should prioritize high-intent local questions: who a class is for, beginner readiness, what to expect, what to bring, safety/heat preparation, current availability, and one measurable next action. Claims require owner and compliance review.
 
 ## Google / Analytics
@@ -74,7 +75,7 @@ Historical messaging addresses fear of not being fit/flexible/experienced enough
 
 ## Offer Strategy
 
-- Use a verified core offer hierarchy: beginner entry route → appropriate first booking → paid first purchase → repeat practice/entitlement → retention. Exact products and terms await Fitssey reconciliation.
+- Use an owner-approved core offer hierarchy: beginner entry route → appropriate first booking → paid first purchase → repeat practice/entitlement → retention. Fitssey now supplies the point-in-time product register, but hierarchy, terms, and campaign priorities still await Michael/Kat approval. [Source: docs/current-offer-register.md]
 - Preserve course-led onboarding as a historically promising hypothesis, because structured beginner courses were reported as commercially useful and confidence-building. Test it against current data before investment. [Source: marketing-content-history.md]
 - Treat workshops, challenges, seasonal passes, recovery/longevity, hybrid, retreats, and children’s programs as separate offer hypotheses until current status, economics, capacity, and rules are approved.
 - Do not use historical prices, package names, visit counts, expiry, schedule, or free-trial claims as current marketing facts.
@@ -90,7 +91,7 @@ Historical opportunities include first-to-second-visit support, course-to-regula
 ## Measurement Priorities
 
 1. Lead volume, source/form/campaign, response time, contact outcome, and lead-to-booking conversion.
-2. First-booking show rate and first-to-second attended-visit conversion after Fitssey status codes are confirmed.
+2. First-booking show rate and first-to-second attended-visit conversion using status 0 as booked and status 1 as present, after lifecycle exclusions are approved. [Source: audits/fitssey/visit-status-map.md]
 3. First paid purchase, product category, repeat attendance, entitlement renewal, lapse, and reactivation.
 4. Class utilization by verified current service/time, cancellation/no-show behavior, and seasonality.
 5. Revenue reconciliation and contribution margin by approved offer.
@@ -114,7 +115,7 @@ Meta should remain media and lead-form truth; HubSpot should hold the consent-aw
 
 ## Business Decisions Required
 
-- Confirm the current offer, prices, packages, schedules, class suitability, policies, and claims from Fitssey/owner review.
+- Approve the reconciled current offer register, class suitability, commercial policies, and claims; verify website and Fitssey FrontOffice presentation.
 - Approve lead owner, SLA, disposition vocabulary, and channel handoffs.
 - Approve core audience priorities and the beginner entry promise.
 - Choose form/booking routes and a reusable lead-form data standard.

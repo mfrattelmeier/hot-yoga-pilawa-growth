@@ -1,14 +1,14 @@
 # Business Decision Brief
 
-Audience: Michael and Kat. This brief prioritizes decisions that must be made before Phase 1A design or implementation. Recommendations are defaults for discussion, not authorization. Historical prices, packages, class times, and schedules are excluded from current truth until Fitssey reconciliation.
+Audience: Michael and Kat. This brief prioritizes decisions that remain after the Phase 1A read-only reconciliation and before implementation. Recommendations are defaults for discussion, not authorization. Historical prices, packages, class times, and schedules remain excluded from current truth; the dated Fitssey register still requires owner approval.
 
 ## D01 — Current offer and commercial truth
 
 - **Question:** Which services, courses, pricing options, contracts, introductory offers, schedules, capacities, and policies are current?
 - **Why it matters:** Marketing, lifecycle, reporting, and automation cannot use historical offer versions safely.
 - **Evidence from historical chats:** Numerous classes, passes, events, and prices were used or proposed, then changed, suspended, or contradicted. [Sources: marketing-content-history.md; rozwoj-studia-history.md; general-unprojected-chats-history.md]
-- **Evidence from technical audit:** Fitssey exposes 45 class services, 45 pricing options, and two contracts, but Phase 1 did not approve an item-level current catalog. [Source: audits/fitssey/current-state.md]
-- **Recommended default:** Produce a dated, read-only Fitssey catalog reconciliation and owner-approved offer register; treat every historical commercial detail as stale until matched.
+- **Evidence from technical audit:** The dated Fitssey register now identifies 45 services, 13 scheduled services, 45 pricing options, 26 sold-online pricing options, two sold-online contracts, and current entitlement distributions. Active/archive state and many commercial rules are not exposed. [Sources: docs/current-offer-register.md; audits/fitssey/current-state-reconciliation.md]
+- **Recommended default:** Approve a deliberately small customer-facing subset of the dated register; treat UNKNOWN STATUS and not-sold-online items as unavailable for marketing until reviewed.
 - **Alternatives:** Use only broad categories temporarily; or postpone offer-specific CRM/marketing design.
 - **What Michael/Kat need to decide:** Which entries are active, customer-facing, strategic, and authoritative, and who owns future catalog changes.
 
@@ -17,7 +17,7 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 - **Question:** What exact evidence makes someone a Lead, Qualified, First-time Customer, Active, At-risk, Lapsed, Reactivated, Course Participant, or Advocate?
 - **Why it matters:** These definitions drive schema, segmentation, reporting, and any future automation.
 - **Evidence from historical chats:** The studio distinguished inquiries, beginners, course participants, regulars, inactive clients, returning clients, and community advocates, but never set stable thresholds. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
-- **Evidence from technical audit:** All 382 HubSpot contacts remain Lead while Fitssey contains visit and sale evidence. [Sources: audits/hubspot/current-state.md; audits/fitssey/current-state.md]
+- **Evidence from technical audit:** All 382 contacts in the Phase 1 HubSpot snapshot were Lead. Phase 1A counted 383 non-archived contacts after one new contact was created, but did not re-audit that record's lifecycle properties; Fitssey contains visit and sale evidence. [Sources: audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md; audits/fitssey/current-state-reconciliation.md]
 - **Recommended default:** Use event-backed stages and separate HubSpot relationship stage from a product-aware studio engagement status.
 - **Alternatives:** Minimal lead/customer split; or lifecycle reporting only in an analytical layer.
 - **What Michael/Kat need to decide:** Entry/exit evidence, recency windows, exclusions, and treatment of free visits, events, courses, guardians, and staff/test accounts.
@@ -37,7 +37,7 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 - **Question:** May Fitssey user GUID become the operational join key in HubSpot, and how are ambiguous matches handled?
 - **Why it matters:** Bad merges could expose or corrupt customer history.
 - **Evidence from historical chats:** Fitssey was historically the practical customer/booking home; guardian/child flows and shared contact details may exist. [Sources: rozwoj-studia-history.md; strona-www-i-fitssey-history.md]
-- **Evidence from technical audit:** Fitssey has stable GUIDs but also duplicate emails/phones and 24 records without either; phone alone is unsafe. [Source: audits/fitssey/current-state.md]
+- **Evidence from technical audit:** Among 467 current Fitssey clients, 107 have unique-email and 124 unique-phone HubSpot candidates; both signals agree for 100, no unique-signal conflicts were found, 20 shared-phone groups remain, and 24 clients have neither contact method. [Source: audits/fitssey/identity-follow-up.md]
 - **Recommended default:** GUID-first linking; unique email as a candidate; phone only when uniquely corroborated; manual conflict queue; never match on name alone.
 - **Alternatives:** Keep systems unlinked; use an external master-person ID.
 - **What Michael/Kat need to decide:** Approved key, evidence threshold, conflict owner, merge/link authority, and guardian/minor model.
@@ -68,16 +68,16 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 - **Why it matters:** Meta reports 400 lead actions but only 78 person-level records are retrievable, leaving a gap of 322.
 - **Evidence from historical chats:** Chats name campaigns and offers but cannot reconstruct individual identities or verified outcomes. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
 - **Evidence from technical audit:** Current Graph reads cannot provide the full history. [Source: audits/meta/current-state.md]
-- **Recommended default:** Accept partial historical attribution unless an approved export exists; begin complete prospective event capture from an agreed date.
+- **Owner direction recorded:** Michael accepts the person-level gap as likely incomplete historical availability unless a reliable export/archive is later found. Preserve available history and begin complete prospective attribution from an approved cutover date. Do not state a Meta lead-retention period unless verified.
 - **Alternatives:** Obtain approved Meta/HubSpot exports; use aggregate-only historical reporting.
-- **What Michael/Kat need to decide:** Backfill effort, acceptable source, cutover date, and confidence labels for old reporting.
+- **What Michael/Kat need to decide:** Cutover date, acceptable future archive/export source, and confidence labels for old reporting.
 
 ## D08 — Booking and commercial policies
 
 - **Question:** What are the authoritative booking, cancellation, no-show, waitlist, expiry, freeze, make-up, refund, and transfer rules?
 - **Why it matters:** Policies affect capacity, customer experience, retention, and lifecycle signals.
 - **Evidence from historical chats:** Rules tightened after no-shows and speculative bookings, but versions conflict on deadlines, minimum attendance, freeze length, course rules, and OPEN status. [Source: rozwoj-studia-history.md]
-- **Evidence from technical audit:** Fitssey visit-status labels and some product semantics remain unresolved. [Source: audits/fitssey/current-state.md]
+- **Evidence from technical audit:** Visit status labels are resolved: booked 0, present 1, absent 2, early cancellation 3/4, late cancellation 5/6, class cancelled 7, waiting list 8, and unconfirmed 9. The API still does not expose the studio's cutoff, penalty, deduction, freeze, refund, transfer, or exception rules. [Sources: audits/fitssey/visit-status-map.md; audits/fitssey/commercial-policy-reconciliation.md]
 - **Recommended default:** One owner-approved policy matrix mapped directly to Fitssey settings and customer-facing text.
 - **Alternatives:** Product-specific rules; simplified universal rules where operationally viable.
 - **What Michael/Kat need to decide:** Exact rules, exceptions, authority, enforcement, and communication ownership.
@@ -87,7 +87,7 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 - **Question:** Which current services are appropriate first steps for true beginners, and what can marketing promise?
 - **Why it matters:** Overbroad reassurance may route people into unsuitable classes; excessive caution may suppress conversion.
 - **Evidence from historical chats:** Beginner confidence and own-pace practice were central, but some dated Fitssey services were labeled intermediate. Structured courses historically improved readiness. [Sources: marketing-content-history.md; kurs-jogi-od-podstaw-history.md]
-- **Evidence from technical audit:** Current item-level suitability was not audited.
+- **Evidence from technical audit:** The schedule currently includes Hatha and Vinyasa services named for beginners, while multiple beginner-course records are unscheduled. Fitssey experience-level references exist, but owner-approved suitability and claims were not established. [Sources: audits/fitssey/current-service-catalog.md; audits/fitssey/current-schedule-structure.md]
 - **Recommended default:** Publish a verified beginner route by need and service; say modifications are available only where instructors approve.
 - **Alternatives:** Dedicated intro course; consultation/first-visit recommendation; broad all-levels promise after review.
 - **What Michael/Kat need to decide:** Approved entry offers, contraindication/claim language, and owner of suitability updates.
@@ -97,7 +97,7 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 - **Question:** What behavior indicates active, at-risk, lapsed, and reactivated status for each product type?
 - **Why it matters:** Courses, limited passes, unlimited contracts, and event buyers have different expected rhythms.
 - **Evidence from historical chats:** Regularity, course progression, challenges, seasonal passes, inactive-client outreach, and return-to-routine campaigns recur; summer decline and booking misuse were real concerns. [Sources: marketing-content-history.md; rozwoj-studia-history.md]
-- **Evidence from technical audit:** Fitssey has 8,137 visit rows, but status codes require confirmation. [Source: audits/fitssey/current-state.md]
+- **Evidence from technical audit:** Status 1 now provides a reliable attended event, and current-derived pricing/contract aggregates exist. Sixty-seven of 467 current clients have a current-derived entitlement; product-specific lapse thresholds remain unapproved. [Sources: audits/fitssey/visit-status-map.md; audits/fitssey/current-state-reconciliation.md]
 - **Recommended default:** Product-aware windows based on attended visits and entitlement expiry, validated on historical aggregates.
 - **Alternatives:** One universal recency window; manual segments initially.
 - **What Michael/Kat need to decide:** Thresholds, exclusions, desired interventions, and success measures.
@@ -107,7 +107,7 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 - **Question:** Which proposed offers are launched, funded, strategic next, paused, or abandoned?
 - **Why it matters:** Schema, content, staffing, safety, and measurement should not be built around stale grant scenarios.
 - **Evidence from historical chats:** **Siła i Długowieczność**, **Regeneracja Premium**, **Studio Hybrydowe**, retreats, BUR/corporate, private/recovery services, and digital products were planned to varying degrees. [Sources: grants-dotacje-history.md; general-unprojected-chats-history.md]
-- **Evidence from technical audit:** Catalog counts are known, but grant approval, equipment, launch, and product mapping were not audited.
+- **Evidence from technical audit:** No exact Fitssey offer was found for Siła i Długowieczność or Studio Hybrydowe; Regeneracja Premium cannot be equated to the scheduled Yin/REGENERACJA service. Grant approval, equipment, launch, and funding remain unaudited. [Source: docs/current-offer-register.md]
 - **Recommended default:** Place each initiative in a portfolio state with owner, evidence, next gate, and no current-marketing status until verified.
 - **Alternatives:** Focus only on the current core; select one controlled pilot after approval.
 - **What Michael/Kat need to decide:** Status, priority, funding reality, commercial owner, success threshold, and stop criteria.
@@ -125,10 +125,10 @@ Audience: Michael and Kat. This brief prioritizes decisions that must be made be
 ## D13 — Attribution model and reporting control
 
 - **Question:** Which first-touch, last-touch, view-through, lookback, conversion, timezone, currency, and reconciliation rules govern reporting?
-- **Why it matters:** Meta windows differ, person history is incomplete, and Fitssey finance totals are provisional.
+- **Why it matters:** Meta windows differ, person history is incomplete, and accounting/currency controls remain unresolved.
 - **Evidence from historical chats:** Marketing used multiple online and offline/community channels, but results were seldom measured end to end. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
-- **Evidence from technical audit:** Meta attribution windows are mixed; the post-audit GA4 stream exists but is unvalidated; Fitssey currency and sales counts need reconciliation. [Sources: audits/meta/current-state.md; audits/fitssey/current-state.md; docs/architecture.md]
-- **Recommended default:** Report Meta platform attribution beside an independently joined operational model; use Europe/Warsaw provisionally and publish no finance total until reconciled.
+- **Evidence from technical audit:** Meta attribution windows are mixed; the GA4 stream exists but is unvalidated; Fitssey API pagination and exact duplicates now reconcile, while currency, status/refund coverage, and UI/accounting control remain open. [Sources: audits/meta/current-state.md; audits/fitssey/finance-reconciliation.md; docs/architecture.md]
+- **Recommended default:** Report Meta platform attribution beside an independently joined operational model; use Europe/Warsaw provisionally and label the reconciled Fitssey API total as non-accounting until currency and the UI/accounting control are confirmed.
 - **Alternatives:** First-touch only; last-non-direct only; aggregate channel reporting during the data-gap period.
 - **What Michael/Kat need to decide:** Rules, dashboard owner, currency/timezone, reporting cadence, and acceptable historical confidence.
 

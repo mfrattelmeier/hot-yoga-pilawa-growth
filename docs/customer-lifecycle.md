@@ -1,11 +1,12 @@
 # Customer Lifecycle
 
-Status: proposed framework based on the 2026-09-12 technical audit and historical business evidence. No lifecycle automation, schema change, or external write is authorized. Historical prices, packages, class times, and schedules are not current truth.
+Status: proposed framework updated by the 2026-09-13 Phase 1A read-only reconciliation and historical business evidence. No lifecycle automation, schema change, or external write is authorized. Historical prices, packages, class times, and schedules are not current truth.
 
 ## Confirmed current state
 
-- **CONFIRMED:** All 382 HubSpot contacts are at Lead; Lead Status is blank for every contact. [Source: audits/hubspot/current-state.md]
-- **CONFIRMED:** Fitssey has 466 active clients, visit history for 386 unique clients, and sales history for 288 unique clients. [Source: audits/fitssey/current-state.md]
+- **CONFIRMED PHASE 1 SNAPSHOT:** All 382 audited HubSpot contacts were at Lead and had blank Lead Status. Phase 1A counted 383 non-archived contacts after one new contact was created on 2026-09-13, but did not re-audit the new record's lifecycle properties. [Sources: audits/hubspot/current-state.md; audits/fitssey/identity-follow-up.md]
+- **CONFIRMED:** Fitssey currently returns 467 clients in the default list plus 10 additional deleted records, and 8,283 visit-report rows through the requested future boundary. [Sources: audits/fitssey/current-state-reconciliation.md; audits/fitssey/visit-status-map.md]
+- **CONFIRMED:** Fitssey status 0 means booked, 1 present, 2 absent, 3/4 early cancellation, 5/6 late cancellation, 7 class cancelled, 8 waiting list, and 9 unconfirmed. [Source: audits/fitssey/visit-status-map.md]
 - **CONFIRMED:** HubSpot and Fitssey describe different slices of the population and are not currently a unified lifecycle view. [Source: audits/cross-system-gap-analysis.md]
 - **INFERRED:** HubSpot lifecycle cannot presently distinguish prospect, booked visitor, attendee, purchaser, active customer, or lapsed customer. [Source: audits/hubspot/current-state.md]
 
@@ -23,8 +24,8 @@ Kat historically emphasized low-pressure entry, being looked after, clear first 
 | Contacting | The studio is attempting a timely, helpful response. | Owned lead plus recorded outreach attempt | **BUSINESS DECISION REQUIRED:** approve SLA, channels, cadence, and outcomes. |
 | Connected | A two-way exchange confirms the person was reached. | Recorded human response | **BUSINESS DECISION REQUIRED:** define acceptable channels and evidence. |
 | Qualified | The studio and person have identified a suitable next step. | Approved fit/intent criteria and next action | **BUSINESS DECISION REQUIRED:** minimize health-adjacent data and define disqualification. |
-| First booking | A first future visit is reserved in Fitssey. | Earliest qualifying Fitssey booking/visit row | **TECHNICAL FOLLOW-UP REQUIRED:** map Fitssey status codes. |
-| First attended visit | The person completed the first studio experience. | Earliest attended Fitssey visit | **TECHNICAL FOLLOW-UP REQUIRED:** confirm attended code. |
+| First booking | A first future visit is reserved in Fitssey. | Earliest Fitssey visit with status 0 (booked) | **BUSINESS DECISION REQUIRED:** approve exclusions and treatment of later cancellation/waitlist transitions. |
+| First attended visit | The person completed the first studio experience. | Earliest Fitssey visit with status 1 (present) | **BUSINESS DECISION REQUIRED:** approve eligibility and treatment of free/event/course visits. |
 | First-time customer | The person completed the approved first commercial conversion. | First paid order or approved paid-attendance rule | **BUSINESS DECISION REQUIRED:** decide treatment of free trials, vouchers, events, and courses. |
 | Regular / active customer | The person has a valid relationship evidenced by recent attendance and/or entitlement. | Approved Fitssey entitlement/activity rule | **BUSINESS DECISION REQUIRED:** define per product type and recency. |
 | Course participant | The person is enrolled in a structured, time-bounded program. | Current course enrollment/attendance evidence | **BUSINESS DECISION REQUIRED:** decide whether this is a segment, state, or both. |
@@ -65,11 +66,12 @@ Kat historically emphasized low-pressure entry, being looked after, clear first 
 
 Historical tactics included course progression, regularity challenges, longer or seasonal passes, workshops/events, personal reminders, inactive-client outreach, and post-holiday return-to-routine campaigns. They are evidence of prior thinking, not approved automation or current commercial policy. [Sources: marketing-content-history.md; general-unprojected-chats-history.md]
 
-Future retention should be based on attended visits and verified entitlement/purchase evidence, not reservations alone. Product-specific thresholds are necessary because a course participant, limited-pass customer, unlimited-contract customer, and event-only buyer have different expected rhythms. [Sources: audits/fitssey/current-state.md; rozwoj-studia-history.md]
+Future retention should be based on status-1 attended visits and verified entitlement/purchase evidence, not status-0 reservations alone. Product-specific thresholds are necessary because a course participant, limited-pass customer, unlimited-contract customer, and event-only buyer have different expected rhythms. [Sources: audits/fitssey/visit-status-map.md; audits/fitssey/current-state-reconciliation.md; rozwoj-studia-history.md]
 
 ## Automation prerequisites
 
-- **TECHNICAL FOLLOW-UP REQUIRED:** Confirm Fitssey visit-status and finance semantics, reconcile the current product catalog, build the identity crosswalk, and validate stage calculations on sampled records.
+- **CONFIRMED TECHNICAL INPUT:** Fitssey visit-status semantics and the point-in-time service/pricing/contract catalog are reconciled. [Sources: audits/fitssey/visit-status-map.md; docs/current-offer-register.md]
+- **TECHNICAL FOLLOW-UP REQUIRED:** Validate approved stage calculations on sampled records and produce a PII-safe dry-run identity crosswalk; do not create links yet.
 - **BUSINESS DECISION REQUIRED:** Approve lifecycle, field definitions, consent/legal basis, suppression rules, quiet hours, and exit criteria.
 - **TECHNICAL FOLLOW-UP REQUIRED:** Design automations as disabled specifications with test cases and rollback paths before any activation request.
 - **CONFIRMED:** Under repository rules, no marketing automation may be built until the lifecycle and data model are approved. [Source: AGENTS.md]
